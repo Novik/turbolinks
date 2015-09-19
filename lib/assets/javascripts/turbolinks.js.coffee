@@ -32,7 +32,8 @@ fetch = (url, options = {}) ->
     fetchHistory cachedPage
     fetchReplacement url, null, false
   else
-    fetchReplacement url, (options.noscroll ? nil : resetScrollPosition)
+    onLoadFunc = resetScrollPosition unless options.noscroll
+    fetchReplacement url, onLoadFunc
 
 transitionCacheFor = (url) ->
   cachedPage = pageCache[url]
