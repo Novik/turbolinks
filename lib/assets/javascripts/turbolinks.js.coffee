@@ -21,7 +21,7 @@ EVENTS =
   BEFORE_UNLOAD:  'page:before-unload'
   EXPIRE:         'page:expire'
 
-fetch = (url) ->
+fetch = (url, options = {}) ->
   url = new ComponentUrl url
 
   rememberReferer()
@@ -32,7 +32,7 @@ fetch = (url) ->
     fetchHistory cachedPage
     fetchReplacement url, null, false
   else
-    fetchReplacement url, resetScrollPosition
+    fetchReplacement url, (options.noscroll ? nil : resetScrollPosition)
 
 transitionCacheFor = (url) ->
   cachedPage = pageCache[url]
